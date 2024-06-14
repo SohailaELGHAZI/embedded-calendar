@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Data Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #data {
+            white-space: pre-wrap; /* Preserve formatting of JSON data */
+        }
+    </style>
+</head>
+<body>
+    <h1>Data from Node.js API</h1>
+    <div id="data">Loading data...</div>
+
+    <script>
+        // Replace 'https://your-app.herokuapp.com/api/data' with your deployed Node.js API endpoint
+        fetch('http://localhost:9100/api/v2/contact/events')
+            .then(response => response.json())
+            .then(data => {
+                const dataDiv = document.getElementById('data');
+                dataDiv.innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('data').innerHTML = 'Failed to load data';
+            });
+    </script>
+</body>
+</html>
